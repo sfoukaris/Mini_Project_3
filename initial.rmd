@@ -5,4 +5,13 @@ date: "April 4, 2018"
 output: html_document
 ---
 
-TEST 1
+
+MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
+Supporting data includes:
+Existing trails shapefile
+10’ contour elevation data
+vegetation type shapefile
+hydrology (streams, wetlands, etc.) shapefile
+Research locations shapefile
+Challenge course element locations shapefile
+Property Boundary shapefile
