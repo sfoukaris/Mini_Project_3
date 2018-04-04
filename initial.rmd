@@ -1,0 +1,8 @@
+---
+title: "Mini_Project_3"
+author: "Stephanie Foukaris"
+date: "April 4, 2018"
+output: html_document
+---
+
+TEST 1
