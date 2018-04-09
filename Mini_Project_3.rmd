@@ -26,9 +26,27 @@ Propose Two New Campsites
 - Near a walking trail
 
 
+##Elevation Data
 
+```{r}
+url <- "http://download.massgis.digital.mass.gov/shapefiles/state/contours250k.zip"
+local_file <- basename(url)
+download.file(url, destfile = local_file)
+unzip(local_file, exdir = "contours250k")
+```
 
-Create Leaflet Map with Constraints and Existing Points of Interest
+```{r}
+library(sf)
+dsn <- path.expand("contours250k")
+dsn
+list.files(dsn)
+```
+
+```{r}
+st_layers(dsn)
+```
+
+#Create Leaflet Map with Constraints and Existing Points of Interest
 
 Need to add:
 
