@@ -2,28 +2,53 @@
 title: "Mini_Project_3"
 author: "Stephanie Foukaris"
 date: "April 4, 2018"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 
-MacLeish currently has two campsites - one large group site closer to the building and one remote campsite with two tent platforms about one mile from the parking area. We would like to develop one additional campsite that is approximately half a mile walk from the parking area, within 200’ of a stream or other source of water, in forest that is unlike the forest in the two other campsites, relatively flat, and at least 500’ from any research area or any element of the Challenge Course. Propose two new campsite locations for our consideration.
-Supporting data includes:
-Existing trails shapefile
-10’ contour elevation data
-vegetation type shapefile
-hydrology (streams, wetlands, etc.) shapefile
-Research locations shapefile
-Challenge course element locations shapefile
-Property Boundary shapefile
-
-```{r}
+```{r message = FALSE, warning=FALSE}
 library(tidyverse)
 library(macleish)
 library(sf)
 library(leaflet)
 ```
 
+
+Propose Two New Campsites
+
+- Approximately 1/2 mile from parking
+- Within 200 feet of stream or other water (excluding wetlands)
+- In forest unlike other campsites
+- Relatively flat
+- At least 500 feet from research areas and challenge course
+- Near a walking trail
+
+
+
+
+Create Leaflet Map with Constraints and Existing Points of Interest
+
+Need to add:
+
+stream buffers (61 meters)
+research area and challenger course points with circles (152 m)
+
+After identification of possibilities, plot new map with with forest and elevation data.  See which are better fits. Putting all on one map is too much.
+
 ```{r}
-if (require(sp)) {plot(macleish_layers[["challenge_courses"]])}
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = -72.678154, lat = 42.450976, 
+             popup = "Group Campsite") %>%
+  addMarkers(lng = -72.674732, lat = 42.458570, 
+             popup = "Remote Campsite") %>%
+  addMarkers(lng = -72.680663, lat = 42.448013, 
+             popup = "Parking") %>%
+  addCircles(lng = -72.680663, lat = 42.448013, weight = 1, radius = 805) %>%
+  addPolygons(data = macleish_layers[["boundary"]],
+              weight = 1) %>%
+  addPolylines(data = macleish_layers[["streams"]], weight = 2)
 ```
 
