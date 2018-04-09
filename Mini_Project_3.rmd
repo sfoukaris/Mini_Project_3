@@ -23,3 +23,7 @@ library(sf)
 library(leaflet)
 ```
 
+```{r}
+if (require(sp)) {plot(macleish_layers[["challenge_courses"]])}
+```
+
