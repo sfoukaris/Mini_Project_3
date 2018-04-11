@@ -29,17 +29,15 @@ Propose Two New Campsites
 ##Elevation Data
 
 ```{r, eval = FALSE}
-url <- "http://download.massgis.digital.mass.gov/shapefiles/state/contours250k.zip"
-local_file <- basename(url)
-download.file(url, destfile = local_file)
-unzip(local_file, exdir = "contours250k")
+#url <- "http://download.massgis.digital.mass.gov/shapefiles/state/contours250k.zip"
+#local_file <- basename(url)
+#download.file(url, destfile = local_file)
+#unzip(local_file, exdir = "contours250k")
 ```
 
 ```{r}
-library(sf)
-dsn <- path.expand("contours250k")
-dsn
-list.files(dsn)
+#library(sf)
+#contours <- st_read("CONTOURS250k_ARC.shp")
 ```
 
 ```{r}
