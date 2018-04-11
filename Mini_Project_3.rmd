@@ -60,14 +60,18 @@ leaflet() %>%
   addTiles() %>%
   addMarkers(lng = -72.678154, lat = 42.450976, 
              popup = "Group Campsite") %>%
+  addCircles(lng = -72.678154, lat = 42.45976, 
+             weight = 1, radius = 152, color = "red", label = "research/challenge buffer size") %>%
   addMarkers(lng = -72.674732, lat = 42.458570, 
              popup = "Remote Campsite") %>%
   addMarkers(lng = -72.680663, lat = 42.448013, 
              popup = "Parking") %>%
-  addCircles(lng = -72.680663, lat = 42.448013, weight = 1, radius = 805) %>%
+  addCircles(lng = -72.680663, lat = 42.448013, 
+             weight = 1, radius = 805) %>%
   addPolygons(data = macleish_layers[["boundary"]],
               weight = 1) %>%
-  addPolylines(data = macleish_layers[["streams"]], weight = 2) %>%
+  addPolylines(data = macleish_layers[["streams"]], 
+               weight = 2) %>%
   addPolylines(data = macleish_layers[["trails"]], 
                weight = 1, color = "green") %>%
   addPolylines(data = macleish_layers[["research"]], 
