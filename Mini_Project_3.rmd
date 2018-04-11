@@ -67,6 +67,12 @@ leaflet() %>%
   addCircles(lng = -72.680663, lat = 42.448013, weight = 1, radius = 805) %>%
   addPolygons(data = macleish_layers[["boundary"]],
               weight = 1) %>%
-  addPolylines(data = macleish_layers[["streams"]], weight = 2)
+  addPolylines(data = macleish_layers[["streams"]], weight = 2) %>%
+  addPolylines(data = macleish_layers[["trails"]], 
+               weight = 1, color = "green") %>%
+  addPolylines(data = macleish_layers[["research"]], 
+               weight = 1, color = "red") %>%
+  addCircleMarkers(data = macleish_layers[["challenge_courses"]], 
+                   radius = 1, color = "orange")
 ```
 
