@@ -79,6 +79,15 @@ leaflet() %>%
 ```
 
 
+
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(data = macleish_layers[["contours_3m"]], 
+               weight = 1, color = "green")
+```
+
+
 ## trying to put buffers on streams (LAB 16)
 
 ```{r}
