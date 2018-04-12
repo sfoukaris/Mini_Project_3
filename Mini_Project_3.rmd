@@ -67,7 +67,7 @@ leaflet() %>%
              popup = "Group Campsite") %>%
   addMarkers(lng = -72.674732, lat = 42.458570, 
              popup = "Remote Campsite") %>%
-  addPolygons(data = macleish_layers[["contours_3m"]], 
+  addPolylines(data = macleish_layers[["contours_3m"]], 
                weight = 1)
 ```
 
