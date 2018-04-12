@@ -15,7 +15,7 @@ library(sf)
 library(leaflet)
 ```
 
-Here is a link to our GitHub respository:
+We used GiHub to collaborate with each other during this project. [^1]
 
 
 
@@ -111,3 +111,6 @@ leaflet() %>%
                weight = 1, color = "black") %>%
   addPolygons(data = stream_buffer) 
 ```
+
+
+[^1]: [This is the link to the github repository](https://github.com/sfoukaris/Mini_Project_3.git)
