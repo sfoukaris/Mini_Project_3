@@ -18,8 +18,17 @@ library(leaflet)
 We used GiHub to collaborate with each other during this project. [^1]
 
 
+```{r}
+#**Camping - It's IN-TENTS
+##*Leave No Trace Campsite Inititive*
 
-Propose Two New Campsites
+![Let's Get Camping](http://blog.gooutdoors.co.uk/wp-content/uploads/GO_Outdoors_logo_Vectors_RGB.png){.class width = 100px}
+```
+
+
+###Probem Statement
+
+Smithies study hard and need a safe nurturing environment to destress and learn wilderness skills. The existing campsites are not sufficient to sustain the growing population at campus. Smith needs two new campsites to facilitate enhanced educational outreach and an experience with nature for current students. Smith students deserve a place where they can disengage from technology and engage with nature. We utilized the below criteria to propose two additional campsites.
 
 - Approximately 1/2 mile from parking
 - Within 200 feet of stream or other water (excluding wetlands)
@@ -28,6 +37,7 @@ Propose Two New Campsites
 - At least 500 feet from research areas and challenge course
 - Near a walking trail
 
+The critera outlined provided limited campsite selection based on the size of the research area. We concluded the most suitable locations were in the bottom quadrants of the Macleish Boundary.
 
 ###Create Leaflet Map with Constraints and Existing Points of Interest
 
@@ -111,6 +121,25 @@ leaflet() %>%
                weight = 1, color = "black") %>%
   addPolygons(data = stream_buffer) 
 ```
+
+## Data Utilized
+The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general Macleish Field Station including boundaries was provided to us in the "Machleish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
+
+
+
+```{r}
+! [Camping Statistics]()
+```
+
+###*Proposed Solution*
+We feel, based on the evidence presented, that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is aproximatelytwo to four weeks per site. The cost to outfit each site will range between $10,000 to $15,000 per site. Smith College should have all of the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfiting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of aproximately $350 per student initial investment. 
+
+####Further Recommendation
+We would also suggest conducting an Environmental Impact Study on the feasability and impact of adding a bathroom facility. The cost for a bathroom facility would be aproximately $25,000. The environmental impact study could advise further specifics such as the treatment and remoal of grey water and waste water. This would fall outside our Leave No Trace Camsite inititive, but would greatly enhance camper enjoyment.
+
+###Anticipated Roadblocks
+We feel adhering to the core Leave No Trace principles adopted by the Macleish ADvisory should encorage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles (see links).  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored.
+
 
 
 [^1]: [This is the link to the github repository](https://github.com/sfoukaris/Mini_Project_3.git)
