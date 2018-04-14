@@ -37,84 +37,83 @@ The critera outlined above, provided limited campsite selection based on the siz
 
 ###Create Leaflet Map with Constraints and Existing Points of Interest
 
-Added campsite locations, parking, radius of half a mile around parking, the ptoperty boudary, the streams, the trails, the research stations and the callege courses.
+```{r}
+proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
-```{r message=FALSE, warning=FALSE}
-leaflet() %>%
-  addTiles() %>%
-  addMarkers(lng = -72.678154, lat = 42.455000, 
-             popup = "Group Campsite") %>%
-  addCircles(lng = -72.682548, lat = 42.45976, 
-             weight = 1, radius = 152, color = "red", label = "research/challenge buffer size") %>%
-  addMarkers(lng = -72.674732, lat = 42.458570, 
-             popup = "Remote Campsite") %>%
-  addMarkers(lng = -72.680663, lat = 42.448013, 
-             popup = "Parking") %>%
-  addCircles(lng = -72.680663, lat = 42.448013, 
-             weight = 1, radius = 805) %>%
-  addPolygons(data = macleish_layers[["boundary"]],
-              weight = 1) %>%
-  addPolylines(data = macleish_layers[["streams"]], 
-               weight = 2) %>%
-  addPolylines(data = macleish_layers[["trails"]], 
-               weight = 1, color = "green") %>%
-  addPolygons(data = macleish_layers[["research"]], 
-               weight = 1, color = "red") %>%
-  addCircles(data = macleish_layers[["challenge_courses"]], 
-                   radius = 152, color = "orange")
-```
+stream_buffer <- macleish_layers[["streams"]] %>%
+  st_transform(proj4_aea) %>%
+  st_buffer(dist = 61) %>%
+  st_transform(4326)
 
-Campsite locations and the contour data.
-
-```{r message=FALSE, warning=FALSE}
-leaflet() %>%
-  addTiles() %>%
-  addMarkers(lng = -72.678154, lat = 42.455000, 
-             popup = "Group Campsite") %>%
-  addMarkers(lng = -72.674732, lat = 42.458570, 
-             popup = "Remote Campsite") %>%
-  addPolylines(data = macleish_layers[["contours_3m"]], 
-               weight = 1)
-```
-
-Forest data
-
-```{r message=FALSE, warning=FALSE}
 forest_pal <- colorFactor("Greens", macleish_layers[["forests"]]$Sheet1__Na)
 ```
 
-
-```{r message=FALSE, warning=FALSE}
-leaflet() %>%
-  addTiles() %>%
+```{r}
+parking <- data.frame(lat = 42.448013, lon = -72.680663)
+map <- leaflet() %>%
+  # Base groups
+  addTiles(group = "OpenStreetMap") %>%
+  addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
+  # Boundaries
+  addPolygons(data = macleish_layers[["boundary"]], weight = 1, group = "Boundaries") %>%
+  # Existing Camping Features
   addMarkers(lng = -72.678154, lat = 42.455000, 
-             popup = "Group Campsite") %>%
-  addMarkers(lng = -72.674732, lat = 42.458570, 
-             popup = "Remote Campsite") %>%
+             popup = "Group Campsite", group = "Existing Camping") %>%
+  addMarkers(lng = -72.679581, lat = 42.458549, 
+             popup = "Remote Campsite", group = "Existing Camping") %>%
+  addMarkers(lng = -72.680663, lat = 42.448013, 
+             popup = "Parking", group = "Existing Camping") %>%
+  # Stay Close to Trails, Streams (in 61 m buffer), Parking (805 m)
+  addPolylines(data = macleish_layers[["trails"]], 
+               weight = 1, color = "brown",
+               popup = ~ name, group = "Features to be Near") %>%
+  addPolylines(data = macleish_layers[["streams"]], 
+               weight = 2, group = "Features to be Near") %>%
+  addPolygons(data = stream_buffer, weight = 1, group = "Features to be Near") %>%
+  addCircles(lng = -72.680663, lat = 42.448013, 
+             weight = 2, opacity = .5, radius = 805, group = "Features to be Near") %>%
+  # Avoid Wetlands, Research Plots (152 m), and Challenge Course (152 m)
+  addPolygons(data = macleish_layers[["wetlands"]], 
+              weight = 1, group = "Features to Avoid") %>%
+  addPolygons(data = macleish_layers[["research"]], 
+               weight = 1, color = "orange", group = "Features to Avoid") %>%
+  addCircles(lng = -72.6835, lat = 42.4542, 
+             weight = 1, radius = 152, color = "orange", 
+             label = "research buffer", group = "Features to Avoid") %>%
+  addCircles(data = macleish_layers[["challenge_courses"]], 
+                   radius = 1, color = "orange", group = "Features to Avoid") %>%
+  # Consider Forest and Slope
   addPolygons(data = macleish_layers[["forests"]], 
               color = ~forest_pal(Sheet1__Na), weight = 0.1, 
               fillOpacity = 0.2,
-              popup = ~ Sheet1__Na, group = "Natural") 
+              popup = ~ Sheet1__Na, group = "Forests") %>%
+  addPolylines(data = macleish_layers[["contours_3m"]], color = "gray", 
+               weight = 1, group = "Slope") %>%
+  #Possible Camping
+  addCircleMarkers(lng = -72.6858, lat = 42.4546, color = 'green', group = "Possible Camping") %>%
+  addCircleMarkers(lng = -72.6762, lat = 42.4535, color = 'green', group = "Possible Camping") %>%
+  addCircleMarkers(lng = -72.6790, lat = 42.4444, color = 'green', group = "Possible Camping") %>%
+  addCircleMarkers(lng = -72.6752, lat = 42.4477, color = 'green', group = "Possible Camping") %>%
+  addCircleMarkers(lng = -72.6737, lat = 42.4493, color = 'green', group = "Possible Camping") %>%
+  #Proposed Camping
+  addMarkers(lng = -72.6858, lat = 42.4546, 
+             popup = "Proposed Campsite 1", group = "Proposed Sites") %>%
+  addMarkers(lng = -72.6737, lat = 42.4493, 
+             popup = "Proposed Campsite 2", group = "Proposed Sites") %>%
+  # Layers control
+  addLayersControl(
+    baseGroups = c("OpenStreetMap", "Satellite"),
+    overlayGroups = c("Boundaries", "Existing Camping", "Features to be Near", 
+                      "Features to Avoid", "Forests", "Slope", "Possible Camping", "Proposed Sites"),
+                      options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  setView(lat = parking$lat, lng = parking$lon, zoom = 14)
+map
 ```
 
-```{r message=FALSE, warning =FALSE}
-proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
-```
 
-Stream buffers
 
-```{r message=FALSE, warning=FALSE}
-stream_buffer <- macleish_layers[["streams"]] %>%
-  st_transform(proj4_aea) %>%
-  st_buffer(dist = 10) %>%
-  st_transform(4326)
 
-leaflet() %>%
-  addTiles() %>%
-  addPolylines(data = macleish_layers[["streams"]], 
-               weight = 1, color = "black") %>%
-  addPolygons(data = stream_buffer) 
-```
 
 ###Data Utilized
 The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general Macleish Field Station including boundaries was provided to us in the "Machleish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
