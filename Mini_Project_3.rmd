@@ -35,7 +35,7 @@ Smithies study hard and need a safe nurturing environment to destress and learn 
 - Relatively flat
 - At least 500 feet from research areas and challenge course
 
-The critera outlined above, provided limited campsite selection based on the size of the research area. We concluded the most suitable locations were in the bottom quadrants of the Macleish Boundary as shown with red markers in the following maps.
+The criteria outlined above, provided limited campsite selection based on the size of the research area. We concluded the most suitable locations were in the bottom quadrants of the MacLeish Boundary as shown with red markers in the following maps.
 
 ###Create Leaflet Map with Constraints and Existing Points of Interest
 
@@ -114,30 +114,29 @@ map
 ```
 
 
-
 ###Data Utilized
 
-The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general Macleish Field Station including boundaries was provided to us in the "Machleish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
+The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general MacLeish Field Station including boundaries was provided to us in the "MacLeish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
 
 
 ###Proposed Solution
 
-We feel, based on the evidence presented, that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is aproximately two to four weeks per site. The cost to outfit each site will range between $4,000 to $6,000 per site. Smith College should have all of the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfiting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of aproximately $350 per student initial investment. 
+We feel, based on the evidence presented, that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is approximately two to four weeks per site. The cost to outfit each site will range between $4,000 to $6,000 per site. Smith College should have all the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfitting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of approximately $350 per student initial investment. 
 
 
 ###Sites Chosen
 
-For our proposal sites, we chose the abandoned field at the bottom middle MacLeish Field Station quadrant boundary. This would minimize environmental impact as well as provide useful life for an area of underutilized land. We also propose the utilization of the Sugarloaf Forrest for it's tranquil setting. The Sugarloaf Forrest is utilized for maple sap currently, but due to the temperature requirements to facilitate the sap tapping, it would not be desirable to camp at the same time as the maple tapping.; therefore there would be no overlap. 
+For our proposal sites, we chose the abandoned field at the bottom middle MacLeish Field Station quadrant boundary. This would minimize environmental impact as well as provide useful life for an area of underutilized land. We also propose the utilization of the Sugarloaf Forrest for its tranquil setting. The Sugarloaf Forrest is utilized for maple sap currently, but due to the temperature requirements to facilitate the sap tapping, it would not be desirable to camp at the same time as the maple tapping.; therefore, there would be no overlap. 
 
 
 ###Further Recommendation
 
-We would also suggest conducting an Environmental Impact Study on the feasability and impact of adding a bathroom facility. The cost for a bathroom facility would be aproximately $25,000. The environmental impact study could advise further specifics such as the treatment and remoal of grey water and waste water. This would fall outside our Leave No Trace Camsite inititive, but would greatly enhance camper enjoyment.
+We would also suggest conducting an Environmental Impact Study on the feasibility and impact of adding a bathroom facility. The cost for a bathroom facility would be approximately $25,000. The environmental impact study could advise further specifics such as the treatment and removal of grey water and waste water. This would fall outside our Leave No Trace Campsite initiative but would greatly enhance camper enjoyment. The ability to have bathrooms and shower availability would increase the camper count.
 
 
 ###Anticipated Roadblocks
 
-We feel adhering to the core Leave No Trace principles adopted by the Macleish ADvisory should encorage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles (see links).  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored.
+We feel adhering to the core Leave No Trace principles adopted by the MacLeish Advisory should encourage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles (see links).  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored.
 
 ####Reference Sources
 
@@ -150,5 +149,7 @@ https://www.smith.edu/ceeds/macleish.php
 https://www.smith.edu/ceeds/form_camping.php
 
 https://www.tripsavvy.com/setting-up-a-campsite-498429
+
+
 
 [^1]: [This is the link to the github repository](https://github.com/sfoukaris/Mini_Project_3.git)
