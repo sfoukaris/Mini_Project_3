@@ -23,7 +23,6 @@ We decided to explore the MacLeish spatial data and propose two new campsite loc
 
 ##*Leave No Trace Campsite Initiative*
 
-![MacLeish Field Station](https://goo.gl/images/QmQ4us)
 
 ###Problem Statement
 
@@ -35,11 +34,16 @@ Smithies study hard and need a safe nurturing environment to destress and learn 
 - Relatively flat
 - At least 500 feet from research areas and challenge course
 
-The criteria outlined above, provided limited campsite selection based on the size of the research area. We concluded the most suitable locations were in the bottom quadrants of the MacLeish Boundary as shown with red markers in the following maps.
+###Approach
 
-###Create Leaflet Map with Constraints and Existing Points of Interest
+In order to decide where the ideal campsite locations would be, we decided to use the layers in the Macleish package in R to explore the Macleish Field Station.  Initially, we created many different maps with all the criteria listed above, but eventually decided that an interactive leaflet map would be ideal.  Being able to enable and disable layers, makes it easy to see where good campsite locations are. Having each individual layer as a possible box to turn on and off was not very helpful, so we decided to create eight groups. The gorups we crated were, boundaries, existing camping, features to be near, features to avoid, forests, slope, possible camping and proposed camping.  
+
+
+###Interactive Leaflet Map
 
 ```{r message = FALSE, warning=FALSE}
+
+#Added stream buffers
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
 stream_buffer <- macleish_layers[["streams"]] %>%
@@ -47,25 +51,32 @@ stream_buffer <- macleish_layers[["streams"]] %>%
   st_buffer(dist = 61) %>%
   st_transform(4326)
 
+#Created the color palette for the forests
 forest_pal <- colorFactor("Greens", macleish_layers[["forests"]]$Sheet1__Na)
 ```
 
 ```{r message = FALSE, warning=FALSE}
-parking <- data.frame(lat = 42.448013, lon = -72.680663)
-map <- leaflet() %>%
-  # Base groups
+    # Added a point for the parking area to use as a central point in our map
+  parking <- data.frame(lat = 42.448013, lon = -72.680663)
+  map <- leaflet() %>%
+    
+    # Break map information into logical groups that can be turned on and off
+    # Base groups
   addTiles(group = "OpenStreetMap") %>%
   addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
-  # Boundaries
+  
+    # Boundaries
   addPolygons(data = macleish_layers[["boundary"]], weight = 1, group = "Boundaries") %>%
-  # Existing Camping Features
+  
+    # Existing Camping Features
   addMarkers(lng = -72.678154, lat = 42.455000, 
              popup = "Group Campsite", group = "Existing Camping") %>%
   addMarkers(lng = -72.679581, lat = 42.458549, 
              popup = "Remote Campsite", group = "Existing Camping") %>%
   addMarkers(lng = -72.680663, lat = 42.448013, 
              popup = "Parking", group = "Existing Camping") %>%
-  # Stay Close to Trails, Streams (in 61 m buffer), Parking (805 m)
+  
+    # Stay Close to Trails, Streams (in 61 m buffer) and Parking (805 m)
   addPolylines(data = macleish_layers[["trails"]], 
                weight = 1, color = "brown",
                popup = ~ name, group = "Features to be Near") %>%
@@ -74,7 +85,8 @@ map <- leaflet() %>%
   addPolygons(data = stream_buffer, weight = 1, group = "Features to be Near") %>%
   addCircles(lng = -72.680663, lat = 42.448013, 
              weight = 2, opacity = .5, radius = 805, group = "Features to be Near") %>%
-  # Avoid Wetlands, Research Plots (152 m), and Challenge Course (152 m)
+  
+    # Avoid Wetlands, Research Plots (152 m), and Challenge Course (152 m)
   addPolygons(data = macleish_layers[["wetlands"]], 
               weight = 1, group = "Features to Avoid") %>%
   addPolygons(data = macleish_layers[["research"]], 
@@ -84,49 +96,48 @@ map <- leaflet() %>%
              label = "research buffer", group = "Features to Avoid") %>%
   addCircles(data = macleish_layers[["challenge_courses"]], 
                    radius = 1, color = "orange", group = "Features to Avoid") %>%
-  # Consider Forest and Slope
+  
+    # Consider Forest Type and Slope
   addPolygons(data = macleish_layers[["forests"]], 
               color = ~forest_pal(Sheet1__Na), weight = 0.1, 
               fillOpacity = 0.2,
               popup = ~ Sheet1__Na, group = "Forests") %>%
   addPolylines(data = macleish_layers[["contours_3m"]], color = "gray", 
                weight = 1, group = "Slope") %>%
-  #Possible Camping
+    
+    # Possible Camping Sites
   addCircleMarkers(lng = -72.6858, lat = 42.4546, color = 'green', group = "Possible Camping") %>%
   addCircleMarkers(lng = -72.6762, lat = 42.4535, color = 'green', group = "Possible Camping") %>%
   addCircleMarkers(lng = -72.6790, lat = 42.4444, color = 'green', group = "Possible Camping") %>%
   addCircleMarkers(lng = -72.6752, lat = 42.4477, color = 'green', group = "Possible Camping") %>%
   addCircleMarkers(lng = -72.6737, lat = 42.4493, color = 'green', group = "Possible Camping") %>%
-  #Proposed Camping
+  
+    # Proposed Camping Sites
   addMarkers(lng = -72.6858, lat = 42.4546, 
              popup = "Proposed Campsite 1", group = "Proposed Sites") %>%
   addMarkers(lng = -72.6737, lat = 42.4493, 
              popup = "Proposed Campsite 2", group = "Proposed Sites") %>%
-  # Layers control
+  
+    # Layers control
   addLayersControl(
     baseGroups = c("OpenStreetMap", "Satellite"),
     overlayGroups = c("Boundaries", "Existing Camping", "Features to be Near", 
                       "Features to Avoid", "Forests", "Slope", "Possible Camping", "Proposed Sites"),
                       options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  setView(lat = parking$lat, lng = parking$lon, zoom = 14)
+  
+    # Set opening view center on the parking area
+    setView(lat = parking$lat, lng = parking$lon, zoom = 14)
 map
 ```
 
 
-###Data Utilized
 
-The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general MacLeish Field Station including boundaries was provided to us in the "MacLeish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
+###Campsites Chosen and Proposed Solution
 
+For our proposed camping sites, we chose an area on the upper left corner of the Macleish Property in the Red Oak Forest. Using the interactive leaflet map, you will see that it is within 200 feet of a stream, withing a 1/2 mile radisu from the parking area, in a different forest from the other campsites, relatively flat and at least 500 feet away from the research areas and challenge course.  Our other proposed camping area is on the right side of the property closr to the bottom part of Macleish.  This site is in the Hemlock-Northern Hardwoods Forest and all the requirements and restrictions apply.  There two camping sites would be easy to create since they are not in abandoned pasture and will be pretty for the people to spend time in.
 
-###Proposed Solution
-
-We feel, based on the evidence presented, that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is approximately two to four weeks per site. The cost to outfit each site will range between $4,000 to $6,000 per site. Smith College should have all the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfitting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of approximately $350 per student initial investment. 
-
-
-###Sites Chosen
-
-For our proposal sites, we chose the abandoned field at the bottom middle MacLeish Field Station quadrant boundary. This would minimize environmental impact as well as provide useful life for an area of underutilized land. We also propose the utilization of the Sugarloaf Forrest for its tranquil setting. The Sugarloaf Forrest is utilized for maple sap currently, but due to the temperature requirements to facilitate the sap tapping, it would not be desirable to camp at the same time as the maple tapping.; therefore, there would be no overlap. 
+We feel that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is approximately two to four weeks per site. The cost to outfit each site will range between $4,000 to $6,000 per site. Smith College should have all the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfitting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of approximately $350 per student initial investment. 
 
 
 ###Further Recommendation
@@ -136,9 +147,14 @@ We would also suggest conducting an Environmental Impact Study on the feasibilit
 
 ###Anticipated Roadblocks
 
-We feel adhering to the core Leave No Trace principles adopted by the MacLeish Advisory should encourage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles (see links).  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored.
+We feel adhering to the core Leave No Trace principles adopted by the MacLeish Advisory should encourage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles.  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored. A major possible roadblock is the funding.  Smith and the Macleish Field Station shoudl come up with the funding for these campsites.
 
-####Reference Sources
+###Data Utilized
+
+The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general MacLeish Field Station including boundaries was provided to us in the "MacLeish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
+
+
+####References
 
 http://www.koapressroom.com/press/2017-north-american-camping-report-released/
 
