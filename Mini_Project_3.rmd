@@ -36,7 +36,7 @@ Smithies study hard and need a safe nurturing environment to destress and learn 
 
 ###Approach
 
-In order to decide where the ideal campsite locations would be, we decided to use the layers in the Macleish package in R to explore the Macleish Field Station.  Initially, we created many different maps with all the criteria listed above, but eventually decided that an interactive leaflet map would be ideal.  Being able to enable and disable layers, makes it easy to see where good campsite locations are. Having each individual layer as a possible box to turn on and off was not very helpful, so we decided to create eight groups. The gorups we crated were, boundaries, existing camping, features to be near, features to avoid, forests, slope, possible camping and proposed camping.  
+In order to decide where the ideal campsite locations would be, we decided to use the layers in the Macleish package in R to explore the Macleish Field Station.  Initially, we created many different maps with all the criteria listed above, but eventually decided that an interactive leaflet map would be ideal.  Being able to enable and disable layers, makes it easy to see where good campsite locations are. Having each individual layer as a possible box to turn on and off was not very helpful, so we decided to create eight groups. The groups we created are, boundaries, existing camping, features to be near, features to avoid, forests, slope, possible camping, and proposed camping.  
 
 
 ###Interactive Leaflet Map
@@ -135,7 +135,9 @@ map
 
 ###Campsites Chosen and Proposed Solution
 
-For our proposed camping sites, we chose an area on the upper left corner of the Macleish Property in the Red Oak Forest. Using the interactive leaflet map, you will see that it is within 200 feet of a stream, withing a 1/2 mile radisu from the parking area, in a different forest from the other campsites, relatively flat and at least 500 feet away from the research areas and challenge course.  Our other proposed camping area is on the right side of the property closr to the bottom part of Macleish.  This site is in the Hemlock-Northern Hardwoods Forest and all the requirements and restrictions apply.  There two camping sites would be easy to create since they are not in abandoned pasture and will be pretty for the people to spend time in.
+For our proposed camping sites, we chose an area in the northwest corner of the Macleish property in the Red Oak Forest. Using the interactive leaflet map, you will see that this campsite is within 200 feet of a stream, within a half mile radius from the parking area, in a different forest from the other campsites, is relatively flat, and at least 500 feet away from the research areas and challenge course.  Our other proposed camping area is on the east side of the property closer to the southern part of Macleish. This site is in the Hemlock-Northern Hardwoods Forest and all the requirements and restrictions apply.
+
+The possible site north of the second site we chose is not ideal because the slope near the stream is too steep. The site in the south end was not chosen because it is in an abandoned pasture and wasn't as scenic as the others. The last possible site not chosen was equally suitable as the second campsite location we chose.
 
 We feel that Smith College should build two basic campgrounds providing sleeping space for 12 with fire rings for open cooking. The estimated time is approximately two to four weeks per site. The cost to outfit each site will range between $4,000 to $6,000 per site. Smith College should have all the required tools for groundwork. Fire Rings for the cooking facilities are available at any home improvement warehouse. The initial outfitting for student supplies, such as tents, sleeping bags, and other camping gear can be acquired at a rate of approximately $350 per student initial investment. 
 
@@ -147,11 +149,11 @@ We would also suggest conducting an Environmental Impact Study on the feasibilit
 
 ###Anticipated Roadblocks
 
-We feel adhering to the core Leave No Trace principles adopted by the MacLeish Advisory should encourage board approval for our planned camp site. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption.  No excavation (other than clearing an area for the cooking area) is anticipated.  Visitors will be expected to adhere to the Leave No Trace principles.  Therefore, no latrine or pit facilities will be constructed.   However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored. A major possible roadblock is the funding.  Smith and the Macleish Field Station shoudl come up with the funding for these campsites.
+We feel adhering to the core Leave No Trace principles adopted by the MacLeish Advisory should encourage board approval for our planned campsite. Environmental impact of site preparation will be minimal.  All efforts will be made to avoid disruption. Visitors will be expected to adhere to the Leave No Trace principles. However, there are always environmental impacts of human activity (trampled vegetation, human waste in ‘catholes’, biodegradable soap used to wash up, etc.) and these should not be ignored. A major possible roadblock is the funding.  Smith and the Macleish Field Station would have to come up with the funding for these campsites.
 
 ###Data Utilized
 
-The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general MacLeish Field Station including boundaries was provided to us in the "MacLeish" Package. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
+The data that we utilized for our analysis was the MassGIS (Bureau of Geographic Information) for elevation/topographic data and stream locations. The general MacLeish Field Station including boundaries was provided to us in the "MacLeish" Package. We also used Satellite Data from ESRI World Imagery and Open Street Map by Leaflet. For outside reference we utilized the ***KOA** 2017 Annual North American Camping Report* as well as *Start Up Jungle*.
 
 
 ####References
